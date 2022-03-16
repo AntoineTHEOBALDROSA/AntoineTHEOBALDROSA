@@ -5,7 +5,7 @@ pygame.init()
 
 WIDTH, HEIGHT = 800, 800
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Procedural Generation")
+pygame.display.set_caption("Terrain Generation")
 
 BLACK = (0, 0, 0)
 GREEN = (0, 255, 0)
@@ -31,9 +31,6 @@ def smooth_map(map):
     for i in range(len(map)):  # len(map)-1
         for j in range(len(map[i])):  # len(map[i])-1
             neighboor = []
-            # neighboor = [map[i-1][j-1], map[i-1][j], map[i-1][j+1],
-            #             map[i][j-1], map[i][j+1],
-            #             map[i+1][j-1], map[i+1][j], map[i+1][j+1]]
             try:
                 neighboor.append(map[i-1][j-1])
             except:
@@ -88,13 +85,10 @@ def draw_map(WIN, map):
             if map[i][j] == 0:
                 pygame.draw.rect(WIN, BLUE, pygame.Rect(
                     i*SIZE, j*SIZE, (i+1)*SIZE, (j+1)*SIZE))
-                #WIN.set_at((i*SIZE, j*SIZE), BLUE)
+
             else:
                 pygame.draw.rect(WIN, GREEN, pygame.Rect(
                     i*SIZE, j*SIZE, (i+1)*SIZE, (j+1)*SIZE))
-                #WIN.set_at((i*SIZE, j*SIZE), GREEN)
-
-# draw_map(WIN, generate_random_color(10,10))
 
 
 def place_random(map, color, number):
@@ -129,7 +123,6 @@ def main():
 
     while run:
         clock.tick(60)
-        # WIN.fill()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -159,6 +152,7 @@ def main():
 main()
 
 # ESPACE : smooth
+# C : clear
 # B : rajouter du bleu
 # G : rajouter du vert (green)
 # modifier la taille des pixels : modifier SIZE ligne 14
